@@ -146,155 +146,63 @@ img {
 /* ── Hero ── */
 
 .hero {
-  padding: 56px 0 72px;
+  padding: 32px 0 56px;
 }
 
-.hero__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+.hero__inner {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 28px;
 }
 
-.hero__wordmark {
-  font-size: clamp(48px, 8vw, 68px);
-  margin-bottom: 20px;
-}
-
-.hero__tagline {
-  font-size: clamp(17px, 2.5vw, 20px);
-  font-weight: 500;
-  color: var(--wh-muted);
-  line-height: 1.55;
-  margin-bottom: 32px;
-  max-width: 420px;
-}
-
-.hero__preview {
-  max-width: 380px;
-}
-
-@media (max-width: 860px) {
-  .hero__grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .hero__tagline,
-  .hero__preview {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-/* Preview card (welcome screen demo) */
-
-.preview-card {
+.hero-art {
+  margin: 0;
+  width: 100%;
+  max-width: 960px;
   border: var(--wh-stroke) solid var(--wh-ink);
   border-radius: var(--wh-radius-xl);
-  box-shadow: 5px 5px 0 var(--wh-ink);
-  padding: 16px;
+  box-shadow: 6px 6px 0 var(--wh-ink);
+  overflow: hidden;
   background: var(--wh-surface);
 }
 
-.preview-card__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
+.hero-art__img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.preview-row {
+.hero__actions {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
 }
 
-.preview-row + .preview-row {
-  margin-top: 0;
-  padding-top: 11px;
-  border-top: 1.5px solid var(--wh-line);
-}
-
-.preview-row--dim {
-  opacity: 0.7;
-}
-
-.preview-row__av {
-  width: 46px;
-  height: 46px;
-  border-radius: 13px;
-  border: var(--wh-stroke) solid var(--wh-ink);
-  flex-shrink: 0;
-}
-
-.preview-row__av--win {
-  background: var(--wh-lime-mid);
-}
-
-.preview-row__av--lose {
-  background: var(--wh-line);
-}
-
-.preview-row__bars {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.preview-bar {
-  height: 13px;
-  border-radius: 999px;
-  background: var(--wh-line);
-}
-
-.preview-bar--sm {
-  height: 9px;
-  opacity: 0.6;
-}
-
-.preview-bar--w72 { width: 72%; }
-.preview-bar--w62 { width: 62%; }
-.preview-bar--w44 { width: 44%; }
-.preview-bar--w38 { width: 38%; }
-
-.preview-row__pct {
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: -1.5px;
-  flex-shrink: 0;
-}
-
-.preview-row__pct--win { color: var(--wh-lime-dk); }
-.preview-row__pct--lose { color: var(--wh-faint); }
-
-.preview-card__split {
-  margin-top: 14px;
-  height: 16px;
-  border-radius: 999px;
-  border: var(--wh-stroke) solid var(--wh-ink);
-  box-shadow: 2px 2px 0 var(--wh-ink);
-  overflow: hidden;
-  display: flex;
-}
-
-.preview-card__verdict {
+.hero__cta {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  margin-top: 12px;
-  padding: 6px 14px;
-  background: var(--wh-lime-lt);
-  border: 1.5px solid var(--wh-lime-mid);
-  border-radius: 999px;
-  font-size: 12.5px;
+  justify-content: center;
+  padding: 14px 28px;
+  border: var(--wh-stroke) solid var(--wh-ink);
+  border-radius: var(--wh-radius-pill);
+  box-shadow: var(--wh-shadow-md);
+  font-size: 15px;
   font-weight: 800;
-  color: var(--wh-lime-dk);
+  color: var(--wh-ink);
+  background: var(--wh-lime);
+  transition: box-shadow var(--wh-dur-fast) var(--wh-ease),
+    transform var(--wh-dur-fast) var(--wh-ease);
 }
 
-.preview-card__verdict svg {
-  flex-shrink: 0;
+.hero__cta:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--wh-ink);
+}
+
+.hero__cta--ghost {
+  background: var(--wh-surface);
 }
 
 /* ── Phone screenshot frames ── */
@@ -491,8 +399,19 @@ img {
   color: var(--wh-muted);
 }
 
+.screenshots-grid--5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .screenshots-grid--5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
-  .screenshots-grid {
+  .screenshots-grid,
+  .screenshots-grid--5 {
     grid-template-columns: 1fr;
     max-width: 320px;
     margin-left: auto;

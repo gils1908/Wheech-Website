@@ -32,57 +32,45 @@
 
     <main>
       <section class="hero">
-        <div class="container hero__grid">
-          <div class="hero__copy">
-            <div class="wh-wordmark hero__wordmark">wheech<span class="wh-dot">.</span></div>
-            <p class="hero__tagline">
-              Crowd-sourced start/sit calls.<br>
-              Settle the lineup every NFL week.
-            </p>
-            <div class="hero__preview preview-card" aria-hidden="true">
-              <div class="preview-card__header">
-                <span class="wh-badge wh-badge--ppr">PPR · Week 7</span>
-                <span class="wh-label" style="margin:0;letter-spacing:.7px;">YOUR RESULT</span>
-              </div>
-              <div class="preview-row">
-                <div class="preview-row__av preview-row__av--win"></div>
-                <div class="preview-row__bars">
-                  <div class="preview-bar preview-bar--w72"></div>
-                  <div class="preview-bar preview-bar--sm preview-bar--w44"></div>
-                </div>
-                <span class="preview-row__pct preview-row__pct--win">63.2</span>
-              </div>
-              <div class="preview-row preview-row--dim">
-                <div class="preview-row__av preview-row__av--lose"></div>
-                <div class="preview-row__bars">
-                  <div class="preview-bar preview-bar--w62"></div>
-                  <div class="preview-bar preview-bar--sm preview-bar--w38"></div>
-                </div>
-                <span class="preview-row__pct preview-row__pct--lose">36.8</span>
-              </div>
-              <div class="preview-card__split wh-split">
-                <div class="wh-split__a" style="width:63.2%"></div>
-                <div class="wh-split__b" style="width:36.8%"></div>
-              </div>
-              <div class="preview-card__verdict">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                The crowd has decided
-              </div>
+        <div class="container hero__inner">
+          <figure class="hero-art" aria-label="Wheech — crowd-sourced start/sit calls">
+            <img
+              src="images/screenshots/og-image.png"
+              alt="Wheech — Crowd-sourced start/sit calls. DeVonta Smith vs Mike Evans crowd verdict."
+              class="hero-art__img"
+              width="1200"
+              height="630"
+            >
+          </figure>
+          <div class="hero__actions">
+            <a href="#how-it-works" class="hero__cta hero__cta--ghost">See how it works</a>
+            <a href="#get-app" class="hero__cta">Get the app</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--tight" id="why-wheech" style="background:var(--wh-lime-lt);border-bottom:var(--wh-stroke) solid var(--wh-ink);">
+        <div class="container">
+          <p class="section__eyebrow">Why Wheech</p>
+          <h2 class="section__title">Built for weekly lineup decisions</h2>
+          <div class="features">
+            <div class="feature-card">
+              <h3 class="feature-card__title">Crowd-powered advice</h3>
+              <p class="feature-card__text">Real start/sit calls from fantasy managers facing the same decisions you are — not algorithmic rankings in a vacuum.</p>
+            </div>
+            <div class="feature-card">
+              <h3 class="feature-card__title">Vote to unlock</h3>
+              <p class="feature-card__text">Contribute three votes and get your verdict. Voting is woven into the core loop — not a separate chore.</p>
+            </div>
+            <div class="feature-card">
+              <h3 class="feature-card__title">PPR &amp; Non-PPR</h3>
+              <p class="feature-card__text">Scoring format matters. Each matchup is tagged PPR or Non-PPR so the crowd compares apples to apples.</p>
+            </div>
+            <div class="feature-card">
+              <h3 class="feature-card__title">Every NFL week</h3>
+              <p class="feature-card__text">Fresh matchups for weeks 1–18. Submit, vote, and settle the lineup before kickoff.</p>
             </div>
           </div>
-          <figure class="phone-frame phone-frame--lg" aria-label="App screenshot: Welcome screen">
-            <div class="phone-frame__shell">
-              <div class="phone-frame__screen">
-                <div class="screenshot-slot" id="shot-welcome">
-                  <img src="images/screenshots/welcome.png" alt="Wheech welcome screen" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
-                  <div class="screenshot-placeholder">
-                    <span class="screenshot-placeholder__label">Screenshot: Welcome / auth</span>
-                    <span class="screenshot-placeholder__file">welcome.png</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </figure>
         </div>
       </section>
 
@@ -159,38 +147,13 @@
         </div>
       </section>
 
-      <section class="section section--tight" style="background:var(--wh-lime-lt);border-top:var(--wh-stroke) solid var(--wh-ink);border-bottom:var(--wh-stroke) solid var(--wh-ink);">
-        <div class="container">
-          <p class="section__eyebrow">Why Wheech</p>
-          <h2 class="section__title">Built for weekly lineup decisions</h2>
-          <div class="features">
-            <div class="feature-card">
-              <h3 class="feature-card__title">Crowd-powered advice</h3>
-              <p class="feature-card__text">Real start/sit calls from fantasy managers facing the same decisions you are — not algorithmic rankings in a vacuum.</p>
-            </div>
-            <div class="feature-card">
-              <h3 class="feature-card__title">Vote to unlock</h3>
-              <p class="feature-card__text">Contribute three votes and get your verdict. Voting is woven into the core loop — not a separate chore.</p>
-            </div>
-            <div class="feature-card">
-              <h3 class="feature-card__title">PPR &amp; Non-PPR</h3>
-              <p class="feature-card__text">Scoring format matters. Each matchup is tagged PPR or Non-PPR so the crowd compares apples to apples.</p>
-            </div>
-            <div class="feature-card">
-              <h3 class="feature-card__title">Every NFL week</h3>
-              <p class="feature-card__text">Fresh matchups for weeks 1–18. Submit, vote, and settle the lineup before kickoff.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section class="section" id="screenshots">
         <div class="container">
           <p class="section__eyebrow">Screenshots</p>
           <h2 class="section__title">See it in action</h2>
           <p class="section__lead">The Lime Zest sticker UI — same look and feel as the mobile app.</p>
 
-          <div class="screenshots-grid">
+          <div class="screenshots-grid screenshots-grid--5">
             <div>
               <figure class="phone-frame">
                 <div class="phone-frame__shell">
@@ -212,16 +175,32 @@
                 <div class="phone-frame__shell">
                   <div class="phone-frame__screen">
                     <div class="screenshot-slot">
-                      <img src="images/screenshots/my-matchups.png" alt="My Matchups screen" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
+                      <img src="images/screenshots/create-matchup.png" alt="Create matchup" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
                       <div class="screenshot-placeholder">
-                        <span class="screenshot-placeholder__label">My Matchups</span>
-                        <span class="screenshot-placeholder__file">my-matchups.png</span>
+                        <span class="screenshot-placeholder__label">Create Matchup</span>
+                        <span class="screenshot-placeholder__file">create-matchup.png</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </figure>
-              <p class="screenshots-grid__caption">My Matchups</p>
+              <p class="screenshots-grid__caption">Create Matchup</p>
+            </div>
+            <div>
+              <figure class="phone-frame">
+                <div class="phone-frame__shell">
+                  <div class="phone-frame__screen">
+                    <div class="screenshot-slot">
+                      <img src="images/screenshots/vote-gate.png" alt="Vote gate" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
+                      <div class="screenshot-placeholder">
+                        <span class="screenshot-placeholder__label">Vote gate</span>
+                        <span class="screenshot-placeholder__file">vote-gate.png</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              <p class="screenshots-grid__caption">Vote to Unlock</p>
             </div>
             <div>
               <figure class="phone-frame">
@@ -238,6 +217,22 @@
                 </div>
               </figure>
               <p class="screenshots-grid__caption">The Verdict</p>
+            </div>
+            <div>
+              <figure class="phone-frame">
+                <div class="phone-frame__shell">
+                  <div class="phone-frame__screen">
+                    <div class="screenshot-slot">
+                      <img src="images/screenshots/my-matchups.png" alt="My Matchups screen" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
+                      <div class="screenshot-placeholder">
+                        <span class="screenshot-placeholder__label">My Matchups</span>
+                        <span class="screenshot-placeholder__file">my-matchups.png</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              <p class="screenshots-grid__caption">My Matchups</p>
             </div>
           </div>
         </div>
