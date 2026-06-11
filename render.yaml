@@ -2,8 +2,7 @@ services:
   - type: web
     name: wheech-website
     runtime: static
+    repo: https://github.com/gils1908/Wheech-Website
+    branch: main
+    autoDeploy: true
     staticPublishPath: .
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html

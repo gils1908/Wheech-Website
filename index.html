@@ -22,26 +22,39 @@
     <header class="site-nav">
       <div class="site-nav__inner">
         <a href="#" class="wh-wordmark" aria-label="Wheech home">wheech<span class="wh-dot">.</span></a>
-        <nav class="site-nav__links" aria-label="Primary">
-          <a href="#how-it-works">How it works</a>
-          <a href="#screenshots">Screenshots</a>
-          <a href="#get-app">Get the app</a>
-        </nav>
-        <details class="site-nav__menu">
-          <summary class="site-nav__menu-btn" aria-label="Open menu">Menu</summary>
-          <nav class="site-nav__menu-panel" aria-label="Mobile">
-            <a href="#how-it-works">How it works</a>
-            <a href="#screenshots">Screenshots</a>
-            <a href="#get-app">Get the app</a>
-          </nav>
-        </details>
-        <a href="#get-app" class="site-nav__cta">Coming soon</a>
+        <div class="site-nav__actions">
+          <div class="site-nav__stores" aria-label="Download the app">
+            <a href="#get-app" class="store-badge store-badge--nav" aria-label="App Store — coming soon">
+              <svg class="store-badge__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              <span class="store-badge__text">
+                <span class="store-badge__label">App Store</span>
+              </span>
+            </a>
+            <a href="#get-app" class="store-badge store-badge--nav" aria-label="Google Play — coming soon">
+              <svg class="store-badge__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a1.004 1.004 0 0 1-.601-.92V2.734a1.004 1.004 0 0 1 .601-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+              <span class="store-badge__text">
+                <span class="store-badge__label">Google Play</span>
+              </span>
+            </a>
+          </div>
+          <span class="site-nav__cta">Coming soon</span>
+        </div>
       </div>
     </header>
 
     <main>
       <section class="hero">
         <div class="container hero__inner">
+          <div class="hook-stat" role="region" aria-label="Why projections fall short">
+            <h1 class="hook-stat__headline">
+              Expert projection said <span class="hook-stat__proj">14.2</span> - He scored <span class="hook-stat__actual">8.1</span>
+            </h1>
+            <p class="hook-stat__body">
+              Weekly projections <strong>miss ~70% of the time</strong>.
+              Wheech uses crowd votes, not spreadsheets.
+            </p>
+            <p class="hook-stat__source">According to multiple analyses of weekly fantasy projections.</p>
+          </div>
           <figure class="hero-art" aria-label="Wheech — crowd-sourced start/sit calls">
             <img
               src="images/screenshots/og-image.png"
@@ -58,27 +71,55 @@
         </div>
       </section>
 
-      <section class="section section--tight" id="why-wheech" style="background:var(--wh-lime-lt);border-bottom:var(--wh-stroke) solid var(--wh-ink);">
+      <section class="section section--tight why-wheech" id="why-wheech">
         <div class="container">
           <p class="section__eyebrow">Why Wheech</p>
           <h2 class="section__title">Built for weekly lineup decisions</h2>
+          <p class="section__lead">Algorithms guess. Managers decide. Wheech gives you a live line for every matchup — updated as the crowd votes.</p>
+
           <div class="features">
-            <div class="feature-card">
+            <article class="feature-card feature-card--featured">
+              <div class="feature-card__stat-block" aria-hidden="true">
+                <span class="feature-card__stat">3%–30%</span>
+                <span class="feature-card__stat-label">Expert projections hit rate</span>
+              </div>
+              <div class="feature-card__content">
+                <span class="feature-card__badge feature-card__badge--lime">The math</span>
+                <h3 class="feature-card__title">Projections miss. A lot.</h3>
+                <p class="feature-card__text">Weekly expert projections land close only <strong>3%–30% of the time</strong>. Wheech skips the spreadsheet — you get crowd votes from managers facing the same call.</p>
+                <p class="feature-card__source">According to multiple analyses of weekly fantasy projections.</p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <span class="feature-card__badge feature-card__badge--lime">Crowd</span>
               <h3 class="feature-card__title">Crowd-powered advice</h3>
-              <p class="feature-card__text">Real start/sit calls from fantasy managers facing the same decisions you are — not algorithmic rankings in a vacuum.</p>
-            </div>
-            <div class="feature-card">
+              <p class="feature-card__text">Real start/sit calls from fantasy managers in your shoes — not algorithmic rankings in a vacuum.</p>
+            </article>
+
+            <article class="feature-card">
+              <span class="feature-card__badge feature-card__badge--lime">Core loop</span>
               <h3 class="feature-card__title">Vote to unlock</h3>
-              <p class="feature-card__text">Contribute three votes and get your verdict. Voting is woven into the core loop — not a separate chore.</p>
-            </div>
-            <div class="feature-card">
+              <p class="feature-card__text">Contribute three votes and get your verdict. Voting is woven in — not a separate chore.</p>
+            </article>
+
+            <article class="feature-card">
+              <span class="feature-card__badge feature-card__badge--lime">Live</span>
+              <h3 class="feature-card__title">Your live line for every matchup</h3>
+              <p class="feature-card__text">Results shift as new votes roll in. Refresh anytime — it's a living crowd split, not a ranking frozen on Tuesday.</p>
+            </article>
+
+            <article class="feature-card">
+              <span class="feature-card__badge feature-card__badge--lime">Formats</span>
               <h3 class="feature-card__title">PPR &amp; Non-PPR</h3>
               <p class="feature-card__text">Scoring format matters. Each matchup is tagged PPR or Non-PPR so the crowd compares apples to apples.</p>
-            </div>
-            <div class="feature-card">
+            </article>
+
+            <article class="feature-card">
+              <span class="feature-card__badge feature-card__badge--lime">Weekly</span>
               <h3 class="feature-card__title">Every NFL week</h3>
               <p class="feature-card__text">Fresh matchups for weeks 1–18. Submit, vote, and settle the lineup before kickoff.</p>
-            </div>
+            </article>
           </div>
         </div>
       </section>
@@ -136,7 +177,7 @@
               <span class="step__num">3</span>
               <div>
                 <h3 class="step__title">Get the crowd verdict</h3>
-                <p class="step__text">See the percentage split — who the crowd would start. Refresh anytime for an updated read during the week.</p>
+                <p class="step__text">See the percentage split — who the crowd would start. Your live line updates as votes come in; refresh anytime before kickoff.</p>
               </div>
               <figure class="phone-frame" aria-label="App screenshot: Results">
                 <div class="phone-frame__shell">
@@ -286,13 +327,5 @@
       </div>
     </footer>
   </div>
-  <script>
-    document.querySelectorAll('.site-nav__menu-panel a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        var menu = link.closest('details');
-        if (menu) menu.removeAttribute('open');
-      });
-    });
-  </script>
 </body>
 </html>
