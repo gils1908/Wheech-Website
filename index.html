@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wheech — Crowd-sourced start/sit calls</title>
+  <meta name="description" content="Crowd-sourced start/sit calls. Settle the lineup every NFL week.">
+  <meta property="og:title" content="Wheech — Crowd-sourced start/sit calls">
+  <meta property="og:description" content="Submit a start/sit matchup, vote on three others, and unlock the crowd verdict.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/screenshots/og-image.png">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/wheech-lz.css">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="site-nav">
+      <div class="site-nav__inner">
+        <a href="#" class="wh-wordmark" aria-label="Wheech home">wheech<span class="wh-dot">.</span></a>
+        <nav class="site-nav__links" aria-label="Primary">
+          <a href="#how-it-works">How it works</a>
+          <a href="#screenshots">Screenshots</a>
+          <a href="#get-app">Get the app</a>
+        </nav>
+        <a href="#get-app" class="site-nav__cta">Coming soon</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero__grid">
+          <div class="hero__copy">
+            <div class="wh-wordmark hero__wordmark">wheech<span class="wh-dot">.</span></div>
+            <p class="hero__tagline">
+              Crowd-sourced start/sit calls.<br>
+              Settle the lineup every NFL week.
+            </p>
+            <div class="hero__preview preview-card" aria-hidden="true">
+              <div class="preview-card__header">
+                <span class="wh-badge wh-badge--ppr">PPR · Week 7</span>
+                <span class="wh-label" style="margin:0;letter-spacing:.7px;">YOUR RESULT</span>
+              </div>
+              <div class="preview-row">
+                <div class="preview-row__av preview-row__av--win"></div>
+                <div class="preview-row__bars">
+                  <div class="preview-bar preview-bar--w72"></div>
+                  <div class="preview-bar preview-bar--sm preview-bar--w44"></div>
+                </div>
+                <span class="preview-row__pct preview-row__pct--win">63.2</span>
+              </div>
+              <div class="preview-row preview-row--dim">
+                <div class="preview-row__av preview-row__av--lose"></div>
+                <div class="preview-row__bars">
+                  <div class="preview-bar preview-bar--w62"></div>
+                  <div class="preview-bar preview-bar--sm preview-bar--w38"></div>
+                </div>
+                <span class="preview-row__pct preview-row__pct--lose">36.8</span>
+              </div>
+              <div class="preview-card__split wh-split">
+                <div class="wh-split__a" style="width:63.2%"></div>
+                <div class="wh-split__b" style="width:36.8%"></div>
+              </div>
+              <div class="preview-card__verdict">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                The crowd has decided
+              </div>
+            </div>
+          </div>
+          <figure class="phone-frame phone-frame--lg" aria-label="App screenshot: Welcome screen">
+            <div class="phone-frame__shell">
+              <div class="phone-frame__screen">
+                <div class="screenshot-slot" id="shot-welcome">
+                  <img src="images/screenshots/welcome.png" alt="Wheech welcome screen" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
+                  <div class="screenshot-placeholder">
+                    <span class="screenshot-placeholder__label">Screenshot: Welcome / auth</span>
+                    <span class="screenshot-placeholder__file">welcome.png</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works">
+        <div class="container">
+          <p class="section__eyebrow">How it works</p>
+          <h2 class="section__title">Submit. Vote. Unlock the verdict.</h2>
+          <p class="section__lead">Wheech is a fantasy start/sit advisor powered by crowd voting — not passive rankings.</p>
+
+          <div class="steps">
+            <article class="step">
+              <span class="step__num">1</span>
+              <div>
+                <h3 class="step__title">Submit a matchup</h3>
+                <p class="step__text">Pick two players you're deciding between. Choose PPR or Non-PPR — each scoring type is its own matchup.</p>
+              </div>
+              <figure class="phone-frame" aria-label="App screenshot: Create matchup">
+                <div class="phone-frame__shell">
+                  <div class="phone-frame__screen">
+                    <div class="screenshot-slot">
+                      <img src="images/screenshots/create-matchup.png" alt="Create matchup screen" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
+                      <div class="screenshot-placeholder">
+                        <span class="screenshot-placeholder__label">Screenshot: Create Matchup</span>
+                        <span class="screenshot-placeholder__file">create-matchup.png</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+            </article>
+
+            <article class="step">
+              <span class="step__num">2</span>
+              <div>
+                <h3 class="step__title">Vote on 3 others</h3>
+                <p class="step__text">Voting is the price of advice. Tap through three community matchups to unlock your result — one pick at a time.</p>
+              </div>
+              <figure class="phone-frame" aria-label="App screenshot: Vote gate">
+                <div class="phone-frame__shell">
+                  <div class="phone-frame__screen">
+                    <div class="screenshot-slot">
+                      <img src="images/screenshots/vote-gate.png" alt="Vote gate screen" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
+                      <div class="screenshot-placeholder">
+                        <span class="screenshot-placeholder__label">Screenshot: Vote gate</span>
+                        <span class="screenshot-placeholder__file">vote-gate.png</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+            </article>
+
+            <article class="step">
+              <span class="step__num">3</span>
+              <div>
+                <h3 class="step__title">Get the crowd verdict</h3>
+                <p class="step__text">See the percentage split — who the crowd would start. Refresh anytime for an updated read during the week.</p>
+              </div>
+              <figure class="phone-frame" aria-label="App screenshot: Results">
+                <div class="phone-frame__shell">
+                  <div class="phone-frame__screen">
+                    <div class="screenshot-slot">
+                      <img src="images/screenshots/results.png" alt="Results screen" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
+                      <div class="screenshot-placeholder">
+                        <span class="screenshot-placeholder__label">Screenshot: Results / Verdict</span>
+                        <span class="screenshot-placeholder__file">results.png</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--tight" style="background:var(--wh-lime-lt);border-top:var(--wh-stroke) solid var(--wh-ink);border-bottom:var(--wh-stroke) solid var(--wh-ink);">
+        <div class="container">
+          <p class="section__eyebrow">Why Wheech</p>
+          <h2 class="section__title">Built for weekly lineup decisions</h2>
+          <div class="features">
+            <div class="feature-card">
+              <h3 class="feature-card__title">Crowd-powered advice</h3>
+              <p class="feature-card__text">Real start/sit calls from fantasy managers facing the same decisions you are — not algorithmic rankings in a vacuum.</p>
+            </div>
+            <div class="feature-card">
+              <h3 class="feature-card__title">Vote to unlock</h3>
+              <p class="feature-card__text">Contribute three votes and get your verdict. Voting is woven into the core loop — not a separate chore.</p>
+            </div>
+            <div class="feature-card">
+              <h3 class="feature-card__title">PPR &amp; Non-PPR</h3>
+              <p class="feature-card__text">Scoring format matters. Each matchup is tagged PPR or Non-PPR so the crowd compares apples to apples.</p>
+            </div>
+            <div class="feature-card">
+              <h3 class="feature-card__title">Every NFL week</h3>
+              <p class="feature-card__text">Fresh matchups for weeks 1–18. Submit, vote, and settle the lineup before kickoff.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="screenshots">
+        <div class="container">
+          <p class="section__eyebrow">Screenshots</p>
+          <h2 class="section__title">See it in action</h2>
+          <p class="section__lead">The Lime Zest sticker UI — same look and feel as the mobile app.</p>
+
+          <div class="screenshots-grid">
+            <div>
+              <figure class="phone-frame">
+                <div class="phone-frame__shell">
+                  <div class="phone-frame__screen">
+                    <div class="screenshot-slot">
+                      <img src="images/screenshots/welcome.png" alt="Welcome screen" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
+                      <div class="screenshot-placeholder">
+                        <span class="screenshot-placeholder__label">Welcome</span>
+                        <span class="screenshot-placeholder__file">welcome.png</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              <p class="screenshots-grid__caption">Welcome</p>
+            </div>
+            <div>
+              <figure class="phone-frame">
+                <div class="phone-frame__shell">
+                  <div class="phone-frame__screen">
+                    <div class="screenshot-slot">
+                      <img src="images/screenshots/my-matchups.png" alt="My Matchups screen" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
+                      <div class="screenshot-placeholder">
+                        <span class="screenshot-placeholder__label">My Matchups</span>
+                        <span class="screenshot-placeholder__file">my-matchups.png</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              <p class="screenshots-grid__caption">My Matchups</p>
+            </div>
+            <div>
+              <figure class="phone-frame">
+                <div class="phone-frame__shell">
+                  <div class="phone-frame__screen">
+                    <div class="screenshot-slot">
+                      <img src="images/screenshots/results.png" alt="Results screen" class="screenshot-img" onload="this.parentElement.classList.add('has-image')" onerror="this.remove()">
+                      <div class="screenshot-placeholder">
+                        <span class="screenshot-placeholder__label">The Verdict</span>
+                        <span class="screenshot-placeholder__file">results.png</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              <p class="screenshots-grid__caption">The Verdict</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section get-app" id="get-app">
+        <div class="container">
+          <p class="section__eyebrow">Get the app</p>
+          <h2 class="section__title">Coming to iOS &amp; Android</h2>
+          <p class="section__lead">Free account · login required to vote. Sign in with Apple or Google.</p>
+
+          <div class="store-badges">
+            <div class="store-badge" aria-label="App Store — coming soon">
+              <svg class="store-badge__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              <span class="store-badge__text">
+                <span class="store-badge__small">Coming soon on</span>
+                <span class="store-badge__label">App Store</span>
+              </span>
+            </div>
+            <div class="store-badge" aria-label="Google Play — coming soon">
+              <svg class="store-badge__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a1.004 1.004 0 0 1-.601-.92V2.734a1.004 1.004 0 0 1 .601-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+              <span class="store-badge__text">
+                <span class="store-badge__small">Coming soon on</span>
+                <span class="store-badge__label">Google Play</span>
+              </span>
+            </div>
+          </div>
+
+          <p class="get-app__note">Season Pass ad-free option — $5.99 one-time per NFL season (when available).</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="wh-wordmark" style="font-size:22px;">wheech<span class="wh-dot">.</span></div>
+        <div class="site-footer__links">
+          <a href="#">Terms</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+        <p class="site-footer__copy">&copy; 2026 Wheech</p>
+        <p class="site-footer__legal">Free account · login required to vote.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
