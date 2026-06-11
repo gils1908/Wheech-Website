@@ -8,6 +8,9 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -18,6 +21,8 @@ body {
   font-size: var(--wh-size-base);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: clip;
 }
 
 a {
@@ -137,9 +142,86 @@ img {
   box-shadow: 2px 2px 0 var(--wh-ink);
 }
 
+/* Mobile menu (no JS) */
+.site-nav__menu {
+  display: none;
+  position: relative;
+}
+
+.site-nav__menu-btn {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  background: var(--wh-surface);
+  border: var(--wh-stroke) solid var(--wh-ink);
+  border-radius: var(--wh-radius-pill);
+  box-shadow: var(--wh-shadow-sm);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--wh-ink);
+}
+
+.site-nav__menu-btn::-webkit-details-marker {
+  display: none;
+}
+
+.site-nav__menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  background: var(--wh-surface);
+  border: var(--wh-stroke) solid var(--wh-ink);
+  border-radius: var(--wh-radius-lg);
+  box-shadow: var(--wh-shadow-md);
+  z-index: 200;
+}
+
+.site-nav__menu-panel a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: var(--wh-radius-md);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--wh-muted);
+}
+
+.site-nav__menu-panel a:hover,
+.site-nav__menu-panel a:active {
+  background: var(--wh-lime-lt);
+  color: var(--wh-ink);
+}
+
 @media (max-width: 640px) {
   .site-nav__links {
     display: none;
+  }
+
+  .site-nav__menu {
+    display: block;
+  }
+
+  .site-nav__inner {
+    padding: 12px var(--wh-space-4);
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
+
+  .site-nav .wh-wordmark {
+    font-size: 24px;
+  }
+
+  .site-nav__cta {
+    padding: 10px 14px;
+    font-size: 12px;
+    min-height: 44px;
   }
 }
 
@@ -526,4 +608,122 @@ img {
   font-weight: 500;
   color: var(--wh-faint);
   line-height: 1.55;
+}
+
+/* ── Mobile ── */
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: max(var(--wh-space-4), env(safe-area-inset-left));
+    padding-right: max(var(--wh-space-4), env(safe-area-inset-right));
+  }
+
+  .section {
+    padding: 48px 0;
+  }
+
+  .section--tight {
+    padding: 40px 0;
+  }
+
+  .section__title {
+    font-size: 26px;
+  }
+
+  .section__lead {
+    font-size: 16px;
+  }
+
+  .hero {
+    padding: 20px 0 40px;
+  }
+
+  .hero__inner {
+    gap: 20px;
+  }
+
+  .hero-art {
+    border-radius: var(--wh-radius-lg);
+    box-shadow: 4px 4px 0 var(--wh-ink);
+  }
+
+  .hero__actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__cta {
+    width: 100%;
+    min-height: 48px;
+    padding: 14px 20px;
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+
+  .step .phone-frame {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .store-badge {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .site-footer {
+    padding-bottom: max(32px, env(safe-area-inset-bottom));
+  }
+
+  .site-footer__inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .site-footer__links {
+    justify-content: center;
+  }
+}
+
+/* Screenshots: horizontal scroll on phones */
+@media (max-width: 767px) {
+  .screenshots-grid--5 {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    margin-top: 32px;
+    margin-left: calc(-1 * max(var(--wh-space-4), env(safe-area-inset-left)));
+    margin-right: calc(-1 * max(var(--wh-space-4), env(safe-area-inset-right)));
+    padding: 4px max(var(--wh-space-4), env(safe-area-inset-right)) 12px
+             max(var(--wh-space-4), env(safe-area-inset-left));
+    max-width: none;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .screenshots-grid--5::-webkit-scrollbar {
+    display: none;
+  }
+
+  .screenshots-grid--5 > div {
+    flex: 0 0 min(72vw, 260px);
+    scroll-snap-align: start;
+  }
+
+  #screenshots .section__lead::after {
+    content: " Swipe to browse.";
+    color: var(--wh-faint);
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .screenshots-grid--5 > div {
+    flex-basis: min(44vw, 240px);
+  }
 }

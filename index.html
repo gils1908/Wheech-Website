@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#faf7f2">
   <title>Wheech — Crowd-sourced start/sit calls</title>
   <meta name="description" content="Crowd-sourced start/sit calls. Settle the lineup every NFL week.">
   <meta property="og:title" content="Wheech — Crowd-sourced start/sit calls">
@@ -26,6 +27,14 @@
           <a href="#screenshots">Screenshots</a>
           <a href="#get-app">Get the app</a>
         </nav>
+        <details class="site-nav__menu">
+          <summary class="site-nav__menu-btn" aria-label="Open menu">Menu</summary>
+          <nav class="site-nav__menu-panel" aria-label="Mobile">
+            <a href="#how-it-works">How it works</a>
+            <a href="#screenshots">Screenshots</a>
+            <a href="#get-app">Get the app</a>
+          </nav>
+        </details>
         <a href="#get-app" class="site-nav__cta">Coming soon</a>
       </div>
     </header>
@@ -278,5 +287,13 @@
       </div>
     </footer>
   </div>
+  <script>
+    document.querySelectorAll('.site-nav__menu-panel a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        var menu = link.closest('details');
+        if (menu) menu.removeAttribute('open');
+      });
+    });
+  </script>
 </body>
 </html>
