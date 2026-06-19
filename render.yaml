@@ -6,3 +6,10 @@ services:
     branch: main
     autoDeploy: true
     staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /privacy
+        destination: /privacy.html
+      - type: rewrite
+        source: /terms
+        destination: /terms.html
