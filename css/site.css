@@ -172,6 +172,12 @@ img {
   }
 }
 
+@media (max-width: 374px) {
+  .site-nav__stores {
+    display: none;
+  }
+}
+
 /* ── Hero hook ── */
 
 .hook-stat {
