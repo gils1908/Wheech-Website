@@ -24,20 +24,20 @@
         <a href="#" class="wh-wordmark" aria-label="Wheech home">wheech<span class="wh-dot">.</span></a>
         <div class="site-nav__actions">
           <div class="site-nav__stores" aria-label="Download the app">
-            <a href="#get-app" class="store-badge store-badge--nav" aria-label="App Store — coming this NFL season">
+            <a href="#early-access" class="store-badge store-badge--nav" aria-label="App Store — join preview waitlist">
               <svg class="store-badge__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
               <span class="store-badge__text">
                 <span class="store-badge__label">App Store</span>
               </span>
             </a>
-            <a href="#get-app" class="store-badge store-badge--nav" aria-label="Google Play — coming this NFL season">
+            <a href="#early-access" class="store-badge store-badge--nav" aria-label="Google Play — join preview waitlist">
               <svg class="store-badge__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a1.004 1.004 0 0 1-.601-.92V2.734a1.004 1.004 0 0 1 .601-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
               <span class="store-badge__text">
                 <span class="store-badge__label">Google Play</span>
               </span>
             </a>
           </div>
-          <span class="site-nav__cta">Coming this NFL season</span>
+          <span class="site-nav__cta"><a href="#early-access" class="site-nav__cta-link">Join waitlist</a></span>
         </div>
       </div>
     </header>
@@ -66,7 +66,7 @@
           </figure>
           <div class="hero__actions">
             <a href="#how-it-works" class="hero__cta hero__cta--ghost">See how it works</a>
-            <a href="#get-app" class="hero__cta">Get the app</a>
+            <a href="#early-access" class="hero__cta">Join waitlist</a>
           </div>
         </div>
       </section>
@@ -287,6 +287,82 @@
         </div>
       </section>
 
+      <section class="section early-access" id="early-access">
+        <div class="container early-access__inner">
+          <p class="section__eyebrow">Early access</p>
+          <h2 class="section__title">Join the preview waitlist</h2>
+          <p class="section__lead">Wheech is in closed preview. Sign up and we&rsquo;ll reach out if you&rsquo;re selected for early access on iOS or Android.</p>
+
+          <div class="early-access__card">
+            <div id="preview-signup-panel-form">
+              <form id="preview-signup-form" class="preview-form">
+                <div class="preview-form__field">
+                  <label class="preview-form__label" for="preview-email">Email <span class="preview-form__required">*</span></label>
+                  <input
+                    class="preview-form__input"
+                    type="email"
+                    id="preview-email"
+                    name="email"
+                    autocomplete="email"
+                    inputmode="email"
+                    required
+                    placeholder="you@example.com"
+                  >
+                </div>
+
+                <div class="preview-form__row">
+                  <div class="preview-form__field">
+                    <label class="preview-form__label" for="preview-platform">Platform <span class="preview-form__required">*</span></label>
+                    <select class="preview-form__input preview-form__select" id="preview-platform" name="platform" required>
+                      <option value="" disabled selected>—</option>
+                      <option value="ios">iOS</option>
+                      <option value="android">Android</option>
+                      <option value="both">Both</option>
+                    </select>
+                  </div>
+
+                  <div class="preview-form__field">
+                    <label class="preview-form__label" for="preview-leagues">Fantasy leagues <span class="preview-form__optional">(optional)</span></label>
+                    <select class="preview-form__input preview-form__select" id="preview-leagues" name="league_count">
+                      <option value="" selected>—</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="more">3+</option>
+                    </select>
+                  </div>
+                </div>
+
+                <p class="preview-form__privacy">
+                  We&rsquo;ll only use your email for the preview waitlist &mdash; to contact you if you&rsquo;re selected. We won&rsquo;t share it or use it for anything else.
+                </p>
+
+                <!-- Honeypot: leave empty -->
+                <div class="preview-form__hp" aria-hidden="true">
+                  <label for="preview-website">Website</label>
+                  <input type="text" id="preview-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+
+                <p id="preview-signup-error" class="preview-form__error" role="alert" hidden></p>
+
+                <button type="submit" class="preview-form__submit" id="preview-signup-submit">Join waitlist</button>
+
+                <p class="preview-form__fineprint">
+                  Joining doesn&rsquo;t guarantee an invite.
+                  <a href="privacy.html">Privacy Policy</a>
+                </p>
+              </form>
+            </div>
+
+            <div id="preview-signup-panel-success" class="preview-success" hidden tabindex="-1">
+              <h3 class="preview-success__title">You&rsquo;re on the list!</h3>
+              <p class="preview-success__body">
+                Thanks for signing up &mdash; glad you&rsquo;re interested in Wheech. If you&rsquo;re selected for the preview, we&rsquo;ll email you with next steps.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section get-app" id="get-app">
         <div class="container">
           <p class="section__eyebrow">Get the app</p>
@@ -328,5 +404,6 @@
       </div>
     </footer>
   </div>
+  <script src="js/preview-signup.js" defer></script>
 </body>
 </html>
