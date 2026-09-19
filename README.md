@@ -73,6 +73,7 @@ cd .. && scripts/push.sh
 |------------|-------------------|
 | Welcome tagline / preview copy | Hero section |
 | Core loop (vote count, scoring types) | How it works |
+| In-app Help copy | `support.html` help sections |
 | Season pass price / ad messaging | Get the app section |
 | Major screens or rebranding | Screenshot list + hero |
 

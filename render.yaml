@@ -13,3 +13,6 @@ services:
       - type: rewrite
         source: /terms
         destination: /terms.html
+      - type: rewrite
+        source: /support
+        destination: /support.html
