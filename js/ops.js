@@ -30,6 +30,40 @@
     statusEl.textContent = text || '';
   }
 
+  function formatWhen(iso) {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return '';
+    const local = d.toLocaleString();
+    const ago = relativeAgo(d);
+    return ago ? `${local} (${ago})` : local;
+  }
+
+  function relativeAgo(d) {
+    const ms = Date.now() - d.getTime();
+    if (ms < 0) return '';
+    const minute = 60 * 1000;
+    const hour = 60 * minute;
+    const day = 24 * hour;
+    if (ms < minute) return 'just now';
+    if (ms < hour) {
+      const n = Math.floor(ms / minute);
+      return n === 1 ? '1 minute ago' : `${n} minutes ago`;
+    }
+    if (ms < 2 * day) {
+      const n = Math.floor(ms / hour);
+      return n === 1 ? '1 hour ago' : `${n} hours ago`;
+    }
+    const n = Math.floor(ms / day);
+    return n === 1 ? '1 day ago' : `${n} days ago`;
+  }
+
+  function flagText(flag) {
+    const base = flag.message || '';
+    if (!flag.at) return base;
+    const when = formatWhen(flag.at);
+    return when ? `${base} · ${when}` : base;
+  }
+
   function fmt(n) {
     return Number(n || 0).toLocaleString();
   }
@@ -76,7 +110,7 @@
       flags.forEach((flag) => {
         const li = document.createElement('li');
         li.className = flag.severity === 'error' ? 'error' : 'warning';
-        li.textContent = flag.message;
+        li.textContent = flagText(flag);
         flagsEl.appendChild(li);
       });
     }
