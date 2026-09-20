@@ -63,6 +63,11 @@
   cursor: pointer;
 }
 
+.ops-ghost:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
 .ops-card {
   background: var(--wh-surface);
   border: 1px solid var(--wh-line);
@@ -144,6 +149,51 @@
 }
 
 .ops-flags .error {
+  background: var(--wh-orange-lt);
+  color: #9a2500;
+}
+
+.ops-sync__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ops-sync__head .ops-kicker {
+  margin: 0;
+}
+
+.ops-sync__when {
+  margin: 10px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--wh-ink);
+}
+
+.ops-sync__run {
+  margin-top: 12px;
+}
+
+.ops-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: #f3f1ec;
+  color: var(--wh-muted);
+}
+
+.ops-badge.ok {
+  background: var(--wh-lime-lt);
+  color: var(--wh-lime-dk);
+}
+
+.ops-badge.stale {
   background: var(--wh-orange-lt);
   color: #9a2500;
 }

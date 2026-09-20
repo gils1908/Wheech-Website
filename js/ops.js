@@ -68,6 +68,36 @@
     return Number(n || 0).toLocaleString();
   }
 
+  function renderNflSync(sync) {
+    const badge = $('ops-sync-badge');
+    const whenEl = $('ops-sync-when');
+    const hintEl = $('ops-sync-hint');
+    if (!badge || !whenEl) return;
+
+    const hours = Number(sync.schedule_hours) || 24;
+    const when = sync.last_success_at
+      ? formatWhen(sync.last_success_at)
+      : 'No successful sync yet';
+    whenEl.textContent = when;
+
+    if (sync.stale) {
+      badge.textContent = 'Stale';
+      badge.className = 'ops-badge stale';
+    } else if (!sync.due) {
+      badge.textContent = 'Idle';
+      badge.className = 'ops-badge';
+    } else {
+      badge.textContent = 'OK';
+      badge.className = 'ops-badge ok';
+    }
+
+    if (hintEl) {
+      hintEl.textContent = sync.due
+        ? `Expected once a day. Stale after ${hours} hours.`
+        : 'Daily sync is not required in this phase.';
+    }
+  }
+
   function setText(id, value) {
     const el = $(id);
     if (el) el.textContent = value;
@@ -99,6 +129,8 @@
       'ops-early-hint',
       `${fmt(early.week_matchups_crowd_ready)} crowd-ready`,
     );
+
+    renderNflSync(snapshot.nfl_sync || {});
 
     flagsEl.innerHTML = '';
     if (!flags.length) {
@@ -154,6 +186,8 @@
 
   const refreshBtn = $('ops-refresh');
   const signOutBtn = $('ops-signout');
+  const runSyncBtn = $('ops-sync-run');
+  let syncRunning = false;
 
   function setAuthed(authed) {
     loginEl.classList.toggle('ops-hidden', authed);
@@ -226,6 +260,35 @@
     loadSnapshot().catch((err) => showError(err.message));
   });
   $('ops-signout').addEventListener('click', signOut);
+
+  async function runNflSync() {
+    if (syncRunning) return;
+    syncRunning = true;
+    showError('');
+    runSyncBtn.disabled = true;
+    runSyncBtn.textContent = 'Running…';
+    try {
+      const { data, error } = await client.functions.invoke('trigger-sync', {
+        body: { run_type: 'nfl_data' },
+      });
+      if (error) {
+        const status = error.context?.status;
+        if (status === 401) throw new Error('Sign-in expired. Please sign in again.');
+        if (status === 403) throw new Error('This account is not on the ops allowlist.');
+        throw new Error(data?.error || error.message || 'Sync failed.');
+      }
+      if (data?.success === false) throw new Error(data.error || 'Sync failed.');
+      await loadSnapshot();
+    } catch (err) {
+      showError(err.message);
+    } finally {
+      syncRunning = false;
+      runSyncBtn.disabled = false;
+      runSyncBtn.textContent = 'Run sync';
+    }
+  }
+
+  runSyncBtn.addEventListener('click', runNflSync);
 
   client.auth.onAuthStateChange((event, session) => {
     if (!session) {
