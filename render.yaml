@@ -16,3 +16,6 @@ services:
       - type: rewrite
         source: /support
         destination: /support.html
+      - type: rewrite
+        source: /ops
+        destination: /ops/index.html

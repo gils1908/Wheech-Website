@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#faf7f2">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Wheech ops">
+  <title>Wheech ops</title>
+  <link rel="icon" href="../images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+  <link rel="stylesheet" href="../css/wheech-lz.css">
+  <link rel="stylesheet" href="../css/ops.css">
+</head>
+<body class="ops-page">
+  <div class="ops-shell">
+    <header class="ops-top">
+      <div>
+        <p class="ops-kicker">Wheech</p>
+        <h1 class="ops-title" id="ops-heading">Ops snapshot</h1>
+        <p class="ops-heading-meta ops-hidden" id="ops-heading-meta" hidden></p>
+      </div>
+      <div class="ops-top-actions">
+        <button type="button" class="ops-ghost ops-hidden" id="ops-refresh" hidden>Refresh</button>
+        <button type="button" class="ops-ghost ops-hidden" id="ops-signout" hidden>Sign out</button>
+      </div>
+    </header>
+
+    <p class="ops-error" id="ops-error" hidden></p>
+
+    <section class="ops-card" id="ops-login">
+      <form class="ops-form" id="ops-magic">
+        <input id="ops-email" type="email" autocomplete="email" placeholder="you@email.com" required>
+        <button class="ops-primary" type="submit">Email magic link</button>
+      </form>
+      <button class="ops-google" type="button" id="ops-google">Continue with Google</button>
+    </section>
+
+    <section id="ops-board" class="ops-hidden" hidden>
+      <div class="ops-grid">
+        <article class="ops-tile">
+          <p class="ops-tile__label">Users</p>
+          <p class="ops-tile__value" id="ops-users">—</p>
+        </article>
+        <article class="ops-tile">
+          <p class="ops-tile__label">Matchups</p>
+          <p class="ops-tile__value" id="ops-matchups">—</p>
+        </article>
+        <article class="ops-tile">
+          <p class="ops-tile__label">Votes</p>
+          <p class="ops-tile__value" id="ops-votes">—</p>
+        </article>
+        <article class="ops-tile">
+          <p class="ops-tile__label">Early voting</p>
+          <p class="ops-tile__value" id="ops-early">—</p>
+          <p class="ops-tile__hint" id="ops-early-hint"></p>
+        </article>
+      </div>
+      <div class="ops-card" style="margin-top:12px">
+        <p class="ops-kicker">Red flags</p>
+        <ul class="ops-flags" id="ops-flags"></ul>
+      </div>
+    </section>
+
+    <p class="ops-status" id="ops-status"></p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.js"></script>
+  <script src="../js/ops.js" defer></script>
+</body>
+</html>

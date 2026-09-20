@@ -79,4 +79,8 @@ cd .. && scripts/push.sh
 
 **Policy:** Copy changes that reflect app messaging are confirmed with Gil before going live. Screenshot swaps are safe once assets are provided.
 
+## Phone ops board
+
+`/ops` is a Gil-only production snapshot (not linked from the marketing nav). Sign-in uses Supabase Auth; counts come from `get-ops-snapshot`. After changing the page, push this repo so Render deploys it.
+
 Internal MVP details (vote threshold K, projection fallback, etc.) stay off the marketing site unless explicitly requested.
