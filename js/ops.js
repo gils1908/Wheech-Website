@@ -122,7 +122,8 @@
       metaEl.classList.toggle('ops-hidden', !meta);
     }
     setText('ops-users', fmt(users.week));
-    setText('ops-matchups', fmt(matchups.user_created));
+    setText('ops-matchups-user', fmt(matchups.user_created));
+    setText('ops-matchups-generated', fmt(matchups.generated));
     setText('ops-votes', fmt(votes.week));
     setText('ops-early', fmt(early.week_matchups_below_k));
     setText(

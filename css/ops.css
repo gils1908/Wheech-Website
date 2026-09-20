@@ -114,6 +114,27 @@
   line-height: 1;
 }
 
+.ops-tile__row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 6px 0 0;
+}
+
+.ops-tile__row .ops-tile__value {
+  margin: 0;
+}
+
+.ops-tile__value--sm {
+  font-size: 24px;
+}
+
+.ops-tile__unit {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--wh-muted);
+}
+
 .ops-tile__hint {
   margin: 8px 0 0;
   font-size: 12px;
