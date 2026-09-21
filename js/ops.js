@@ -34,27 +34,30 @@
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return '';
     const local = d.toLocaleString();
-    const ago = relativeAgo(d);
-    return ago ? `${local} (${ago})` : local;
+    const rel = relativeLabel(d);
+    return rel ? `${local} (${rel})` : local;
   }
 
-  function relativeAgo(d) {
-    const ms = Date.now() - d.getTime();
-    if (ms < 0) return '';
+  function relativeLabel(d) {
+    const ms = d.getTime() - Date.now();
+    const abs = Math.abs(ms);
     const minute = 60 * 1000;
     const hour = 60 * minute;
     const day = 24 * hour;
-    if (ms < minute) return 'just now';
-    if (ms < hour) {
-      const n = Math.floor(ms / minute);
-      return n === 1 ? '1 minute ago' : `${n} minutes ago`;
+    if (abs < minute) return ms >= 0 ? 'due now' : 'just now';
+    let n;
+    let unit;
+    if (abs < hour) {
+      n = Math.floor(abs / minute);
+      unit = n === 1 ? 'minute' : 'minutes';
+    } else if (abs < 2 * day) {
+      n = Math.floor(abs / hour);
+      unit = n === 1 ? 'hour' : 'hours';
+    } else {
+      n = Math.floor(abs / day);
+      unit = n === 1 ? 'day' : 'days';
     }
-    if (ms < 2 * day) {
-      const n = Math.floor(ms / hour);
-      return n === 1 ? '1 hour ago' : `${n} hours ago`;
-    }
-    const n = Math.floor(ms / day);
-    return n === 1 ? '1 day ago' : `${n} days ago`;
+    return ms >= 0 ? `in ${n} ${unit}` : `${n} ${unit} ago`;
   }
 
   function flagText(flag) {
@@ -98,6 +101,61 @@
     }
   }
 
+  function renderCrons(crons) {
+    const list = $('ops-crons');
+    if (!list) return;
+    list.innerHTML = '';
+    if (!Array.isArray(crons) || !crons.length) {
+      const li = document.createElement('li');
+      li.className = 'ops-crons__empty';
+      li.textContent = 'No cron jobs found';
+      list.appendChild(li);
+      return;
+    }
+    crons.forEach((job) => {
+      const li = document.createElement('li');
+      const failed = String(job.last_status || '').toLowerCase() === 'failed';
+      li.className = 'ops-cron';
+      if (job.active === false) li.classList.add('is-inactive');
+      if (failed) li.classList.add('is-failed');
+      li.title = job.jobname || '';
+
+      const top = document.createElement('div');
+      top.className = 'ops-cron__top';
+      const name = document.createElement('p');
+      name.className = 'ops-cron__name';
+      name.textContent = job.label || job.jobname || 'Cron';
+      const sched = document.createElement('span');
+      sched.className = 'ops-cron__sched';
+      const bits = [job.schedule_label || job.schedule || ''];
+      if (job.active === false) bits.push('paused');
+      if (failed) bits.push('failed');
+      sched.textContent = bits.filter(Boolean).join(' · ');
+      top.appendChild(name);
+      top.appendChild(sched);
+
+      const lastIso = job.last_end_at || job.last_start_at;
+      const times = document.createElement('dl');
+      times.className = 'ops-cron__times';
+      const addRow = (label, value) => {
+        const dt = document.createElement('dt');
+        dt.textContent = label;
+        const dd = document.createElement('dd');
+        dd.textContent = value;
+        times.appendChild(dt);
+        times.appendChild(dd);
+      };
+      addRow('Last', lastIso ? formatWhen(lastIso) : 'Never');
+      addRow('Next', job.active === false
+        ? 'Paused'
+        : (job.next_run_at ? formatWhen(job.next_run_at) : 'Unknown'));
+
+      li.appendChild(top);
+      li.appendChild(times);
+      list.appendChild(li);
+    });
+  }
+
   function setText(id, value) {
     const el = $(id);
     if (el) el.textContent = value;
@@ -132,6 +190,7 @@
     );
 
     renderNflSync(snapshot.nfl_sync || {});
+    renderCrons(snapshot.crons || []);
 
     flagsEl.innerHTML = '';
     if (!flags.length) {
@@ -154,19 +213,37 @@
     setStatus(generated ? `Updated ${generated}` : '');
   }
 
+  const refreshBtn = $('ops-refresh');
+  let snapshotLoading = false;
+
+  function setRefreshLoading(on) {
+    if (!refreshBtn) return;
+    refreshBtn.classList.toggle('is-loading', on);
+    refreshBtn.disabled = on;
+    refreshBtn.setAttribute('aria-busy', on ? 'true' : 'false');
+  }
+
   async function loadSnapshot() {
-    const { data, error } = await client.functions.invoke('get-ops-snapshot', {
-      method: 'GET',
-    });
-    if (error) {
-      const status = error.context?.status;
-      if (status === 401) throw new Error('Sign-in expired. Please sign in again.');
-      if (status === 403) throw new Error('This account is not on the ops allowlist.');
-      const nested = data?.error?.message || error.message;
-      throw new Error(nested || 'Could not load snapshot.');
+    if (snapshotLoading) return;
+    snapshotLoading = true;
+    setRefreshLoading(true);
+    try {
+      const { data, error } = await client.functions.invoke('get-ops-snapshot', {
+        method: 'GET',
+      });
+      if (error) {
+        const status = error.context?.status;
+        if (status === 401) throw new Error('Sign-in expired. Please sign in again.');
+        if (status === 403) throw new Error('This account is not on the ops allowlist.');
+        const nested = data?.error?.message || error.message;
+        throw new Error(nested || 'Could not load snapshot.');
+      }
+      if (data?.error?.message) throw new Error(data.error.message);
+      render(data);
+    } finally {
+      snapshotLoading = false;
+      setRefreshLoading(false);
     }
-    if (data?.error?.message) throw new Error(data.error.message);
-    render(data);
   }
 
   function stopTimer() {
@@ -185,7 +262,6 @@
     }, REFRESH_MS);
   }
 
-  const refreshBtn = $('ops-refresh');
   const signOutBtn = $('ops-signout');
   const runSyncBtn = $('ops-sync-run');
   let syncRunning = false;

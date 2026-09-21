@@ -24,6 +24,11 @@
   margin-bottom: 18px;
 }
 
+.ops-top > div:first-child {
+  min-width: 0;
+  flex: 1;
+}
+
 .ops-kicker {
   margin: 0 0 4px;
   font-size: 11px;
@@ -67,6 +72,27 @@
   opacity: 0.55;
   cursor: wait;
 }
+
+.ops-refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ops-refresh__wheel {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.ops-refresh.is-loading .ops-refresh__wheel {
+  animation: ops-spin 0.7s linear infinite;
+}
+
+@keyframes ops-spin {
+  to { transform: rotate(360deg); }
+}
+
 
 .ops-card {
   background: var(--wh-surface);
@@ -289,6 +315,10 @@
   .ops-tile__value {
     font-size: 36px;
   }
+
+  .ops-cron__times {
+    grid-template-columns: 44px 1fr 44px 1fr;
+  }
 }
 
 .ops-error {
@@ -306,4 +336,85 @@
 
 .ops-hidden {
   display: none !important;
+}
+
+.ops-crons {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.ops-cron {
+  padding: 12px 0;
+  border-top: 1px solid var(--wh-line);
+}
+
+.ops-cron:first-child {
+  border-top: 0;
+  padding-top: 4px;
+}
+
+.ops-cron__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ops-cron__name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  min-width: 0;
+}
+
+.ops-cron__sched {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--wh-faint);
+  text-align: right;
+  flex-shrink: 0;
+  max-width: 46%;
+}
+
+.ops-cron__times {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  column-gap: 8px;
+  row-gap: 4px;
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--wh-muted);
+}
+
+.ops-cron__times dt {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--wh-faint);
+}
+
+.ops-cron__times dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--wh-ink);
+}
+
+.ops-cron.is-inactive {
+  opacity: 0.55;
+}
+
+.ops-cron.is-failed .ops-cron__name {
+  color: #9a2500;
+}
+
+.ops-crons__empty {
+  margin: 8px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wh-muted);
 }
