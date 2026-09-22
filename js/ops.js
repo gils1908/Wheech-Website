@@ -101,6 +101,18 @@
     }
   }
 
+  const CRON_ABOUT = {
+    recompute_aggregates: 'Refreshes crowd start/sit percentages after new votes.',
+    provision_synthetic_matchups: 'Fills this week’s vote-gate pool with generated matchups.',
+    flip_off_season: 'Turns the season off three days after week 18 ends.',
+    update_season_state_hourly: 'Checks the NFL calendar and sets the live week and phase.',
+    cleanup_vote_gate_batches: 'Deletes finished vote batches older than a week.',
+    sync_nfl_actuals_daily: 'Pulls player fantasy points from finished games.',
+    sync_nfl_data_daily: 'Updates players, the schedule, and projections. Teams on Mondays.',
+    calc_nfl_weeks_daily: 'Rebuilds each week’s start and end from the schedule.',
+    score_weekly_matchups_tuesday: 'Scores last week’s votes once the games are final.',
+  };
+
   function renderCrons(crons) {
     const list = $('ops-crons');
     if (!list) return;
@@ -134,6 +146,10 @@
       top.appendChild(name);
       top.appendChild(sched);
 
+      const about = document.createElement('p');
+      about.className = 'ops-cron__about';
+      about.textContent = CRON_ABOUT[job.jobname] || '';
+
       const lastIso = job.last_end_at || job.last_start_at;
       const times = document.createElement('dl');
       times.className = 'ops-cron__times';
@@ -151,6 +167,7 @@
         : (job.next_run_at ? formatWhen(job.next_run_at) : 'Unknown'));
 
       li.appendChild(top);
+      if (about.textContent) li.appendChild(about);
       li.appendChild(times);
       list.appendChild(li);
     });
