@@ -102,6 +102,7 @@
   }
 
   const CRON_ABOUT = {
+    open_app_week: 'Prepares the next week before 3:00 AM Eastern: full NFL sync, generated matchups, and a fresh vote gate.',
     recompute_aggregates: 'Refreshes crowd start/sit percentages after new votes.',
     provision_synthetic_matchups: 'Fills this week’s vote-gate pool with generated matchups.',
     flip_off_season: 'Turns the season off three days after week 18 ends.',
