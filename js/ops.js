@@ -95,9 +95,16 @@
     }
 
     if (hintEl) {
+      // schedule_hours is the stale window. Under 12 hours means the hourly Pro cadence.
+      const hourly = hours < 12;
+      const staleAfter = hours === 1 ? '1 hour' : `${hours} hours`;
       hintEl.textContent = sync.due
-        ? `Expected once a day. Stale after ${hours} hours.`
-        : 'Daily sync is not required in this phase.';
+        ? (hourly
+          ? `Expected every hour. Stale after ${staleAfter}.`
+          : `Expected once a day. Stale after ${staleAfter}.`)
+        : (hourly
+          ? 'Hourly sync is not required in this phase.'
+          : 'Daily sync is not required in this phase.');
     }
   }
 
@@ -109,6 +116,7 @@
     update_season_state_hourly: 'Checks the NFL calendar and sets the live week and phase.',
     cleanup_vote_gate_batches: 'Deletes finished vote batches older than a week.',
     sync_nfl_actuals_daily: 'Pulls player fantasy points from finished games.',
+    sync_nfl_data_hourly: 'Updates players, the schedule, and projections every hour. Teams on Mondays.',
     sync_nfl_data_daily: 'Updates players, the schedule, and projections. Teams on Mondays.',
     calc_nfl_weeks_daily: 'Rebuilds each week’s start and end from the schedule.',
     score_weekly_matchups_tuesday: 'Scores last week’s votes once the games are final.',
