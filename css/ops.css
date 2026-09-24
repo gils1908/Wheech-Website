@@ -9,6 +9,11 @@
   -webkit-font-smoothing: antialiased;
 }
 
+.ops-page,
+.ops-page * {
+  box-sizing: border-box;
+}
+
 .ops-shell {
   width: 100%;
   max-width: 520px;
