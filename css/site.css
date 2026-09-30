@@ -921,6 +921,17 @@ img {
   cursor: default;
 }
 
+a.store-badge {
+  cursor: pointer;
+  transition: box-shadow var(--wh-dur-fast) var(--wh-ease),
+    transform var(--wh-dur-fast) var(--wh-ease);
+}
+
+a.store-badge:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--wh-ink);
+}
+
 .store-badge__icon {
   width: 28px;
   height: 28px;
