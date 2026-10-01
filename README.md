@@ -54,7 +54,7 @@ Drop PNGs into `images/screenshots/`. Placeholders show until files exist.
 | `vote-gate.png` | Vote gate | How it works step 2 |
 | `results.png` | Results / Verdict | How it works step 3, Screenshots gallery |
 | `my-matchups.png` | My Matchups list | Screenshots gallery (optional) |
-| `og-image.png` | Open Graph | 1200×630 — link previews |
+| `og-image.png` | Hero and Open Graph | 1024×691 — homepage and link previews |
 
 Export from iOS simulator or device at **2×** resolution.
 

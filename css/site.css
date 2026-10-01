@@ -454,11 +454,6 @@ img {
   margin: 0;
   width: 100%;
   max-width: 960px;
-  border: var(--wh-stroke) solid var(--wh-ink);
-  border-radius: var(--wh-radius-xl);
-  box-shadow: 6px 6px 0 var(--wh-ink);
-  overflow: hidden;
-  background: var(--wh-surface);
 }
 
 .hero-art__img {
@@ -1088,11 +1083,6 @@ a.store-badge:hover {
 
   .hook-stat {
     padding: 22px 20px;
-    border-radius: var(--wh-radius-lg);
-    box-shadow: 4px 4px 0 var(--wh-ink);
-  }
-
-  .hero-art {
     border-radius: var(--wh-radius-lg);
     box-shadow: 4px 4px 0 var(--wh-ink);
   }
