@@ -59,14 +59,21 @@
             <span class="ops-tile__unit">generated</span>
           </p>
         </article>
+      </div>
+      <div class="ops-vote-row">
         <article class="ops-tile">
           <p class="ops-tile__label">Votes</p>
           <p class="ops-tile__value" id="ops-votes">—</p>
+          <p class="ops-tile__hint" id="ops-votes-avg"></p>
         </article>
         <article class="ops-tile">
-          <p class="ops-tile__label">Early voting</p>
+          <p class="ops-tile__label">Early</p>
           <p class="ops-tile__value" id="ops-early">—</p>
-          <p class="ops-tile__hint" id="ops-early-hint"></p>
+        </article>
+        <article class="ops-tile ops-tile--ready">
+          <p class="ops-tile__label">Crowd ready</p>
+          <p class="ops-tile__value" id="ops-ready">—</p>
+          <p class="ops-tile__hint" id="ops-ready-share"></p>
         </article>
       </div>
       <div class="ops-card" style="margin-top:12px">
@@ -91,6 +98,6 @@
     <p class="ops-status" id="ops-status"></p>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.js"></script>
-  <script src="../js/ops.js?v=hourly" defer></script>
+  <script src="../js/ops.js?v=board" defer></script>
 </body>
 </html>

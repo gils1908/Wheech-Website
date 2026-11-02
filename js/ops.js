@@ -71,6 +71,27 @@
     return Number(n || 0).toLocaleString();
   }
 
+  function votesPerUser(votes, users) {
+    const people = Number(users) || 0;
+    if (people <= 0) return '—';
+    const avg = (Number(votes) || 0) / people;
+    return `${avg.toLocaleString(undefined, {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    })} / user`;
+  }
+
+  function crowdShare(ready, userMatchups) {
+    const user = Number(userMatchups) || 0;
+    if (user <= 0) return '—';
+    const pct = Math.round(((Number(ready) || 0) / user) * 100);
+    return `${pct}% of user`;
+  }
+
+  function showPageTop() {
+    window.scrollTo(0, 0);
+  }
+
   function renderNflSync(sync) {
     const badge = $('ops-sync-badge');
     const whenEl = $('ops-sync-when');
@@ -209,10 +230,12 @@
     setText('ops-matchups-user', fmt(matchups.user_created));
     setText('ops-matchups-generated', fmt(matchups.generated));
     setText('ops-votes', fmt(votes.week));
+    setText('ops-votes-avg', votesPerUser(votes.week, users.week));
     setText('ops-early', fmt(early.week_matchups_below_k));
+    setText('ops-ready', fmt(early.week_matchups_crowd_ready));
     setText(
-      'ops-early-hint',
-      `${fmt(early.week_matchups_crowd_ready)} crowd-ready`,
+      'ops-ready-share',
+      crowdShare(early.week_matchups_crowd_ready, matchups.user_created),
     );
 
     renderNflSync(snapshot.nfl_sync || {});
@@ -305,9 +328,11 @@
 
   async function showBoard() {
     setAuthed(true);
+    showPageTop();
     showError('');
     setStatus('Loading…');
     await loadSnapshot();
+    showPageTop();
     startTimer();
   }
 
@@ -392,6 +417,9 @@
   }
 
   runSyncBtn.addEventListener('click', runNflSync);
+
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('pageshow', showPageTop);
 
   client.auth.onAuthStateChange((event, session) => {
     if (!session) {
