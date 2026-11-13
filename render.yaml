@@ -17,5 +17,8 @@ services:
         source: /support
         destination: /support.html
       - type: rewrite
+        source: /release-notes
+        destination: /release-notes.html
+      - type: rewrite
         source: /ops
         destination: /ops/index.html

@@ -1010,7 +1010,8 @@ a.store-badge:hover {
 
 .site-footer__links {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 8px 20px;
   font-size: 13px;
   font-weight: 600;
   color: var(--wh-faint);
@@ -1259,6 +1260,52 @@ a.store-badge:hover {
   font-weight: 800;
 }
 
+.release-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.release-table th,
+.release-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 16px 16px 16px 0;
+  border-bottom: 1px solid var(--wh-line, rgba(18, 20, 26, 0.12));
+}
+
+.release-table thead th {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--wh-faint);
+  padding-top: 0;
+}
+
+.release-table th[scope="row"] {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--wh-ink);
+  white-space: nowrap;
+}
+
+.release-table .release-when {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wh-muted);
+  white-space: nowrap;
+}
+
+.release-table ul {
+  margin: 0;
+}
+
+.release-table li:last-child {
+  margin-bottom: 0;
+}
+
 @media (max-width: 640px) {
   .legal-main {
     padding: 28px 0 48px;
@@ -1266,5 +1313,38 @@ a.store-badge:hover {
 
   .legal-doc__intro {
     font-size: 15px;
+  }
+
+  .release-table thead {
+    display: none;
+  }
+
+  .release-table,
+  .release-table tbody,
+  .release-table tr,
+  .release-table td,
+  .release-table th[scope="row"] {
+    display: block;
+    width: 100%;
+  }
+
+  .release-table tr {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--wh-line, rgba(18, 20, 26, 0.12));
+  }
+
+  .release-table td,
+  .release-table th[scope="row"] {
+    border: 0;
+    padding: 0;
+  }
+
+  .release-table td + td {
+    margin-top: 6px;
+  }
+
+  .release-table th[scope="row"],
+  .release-table .release-when {
+    white-space: normal;
   }
 }
