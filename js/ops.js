@@ -208,6 +208,253 @@
     if (el) el.textContent = value;
   }
 
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  const WEEK_LETTERS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+  const WEEK_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const trendPaint = {};
+
+  function svgEl(name, attrs) {
+    const node = document.createElementNS(SVG_NS, name);
+    Object.keys(attrs).forEach((key) => node.setAttribute(key, String(attrs[key])));
+    return node;
+  }
+
+  function dayParts(iso) {
+    const date = new Date(`${iso}T12:00:00`);
+    const wd = date.getDay();
+    return {
+      letter: WEEK_LETTERS[wd],
+      name: WEEK_NAMES[wd],
+      weekend: wd === 0 || wd === 6,
+      dateLabel: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    };
+  }
+
+  function niceMax(maxValue) {
+    const value = Number(maxValue) || 0;
+    if (value <= 0) return 4;
+    const head = Math.max(value, value * 1.05);
+    const exp = 10 ** Math.floor(Math.log10(head));
+    const frac = head / exp;
+    const nice = frac <= 1 ? 1 : frac <= 2 ? 2 : frac <= 4 ? 4 : frac <= 5 ? 5 : 10;
+    return nice * exp;
+  }
+
+  function paintTrend(svg, tip, days, series) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    tip.hidden = true;
+    const width = svg.clientWidth;
+    const height = svg.clientHeight;
+    if (width < 80 || height < 80 || days.length < 2) return;
+
+    const margin = { top: 8, right: 6, bottom: 42, left: 34 };
+    const plotW = width - margin.left - margin.right;
+    const plotH = height - margin.top - margin.bottom;
+    const g = svgEl('g', { transform: `translate(${margin.left},${margin.top})` });
+    svg.appendChild(g);
+
+    function measure(text, className) {
+      const node = svgEl('text', { class: className });
+      node.textContent = text;
+      g.appendChild(node);
+      const w = node.getComputedTextLength();
+      g.removeChild(node);
+      return w;
+    }
+
+    const letterW = Math.max(...WEEK_LETTERS.map((text) => measure(text, 'ops-trend__label')));
+    const nameW = Math.max(...WEEK_NAMES.map((text) => measure(text, 'ops-trend__label')));
+    const dateW = Math.max(...days.map((row) => measure(dayParts(row.day).dateLabel, 'ops-trend__label is-date')));
+    const everyPad = letterW / 2 + 1;
+    const everyStep = (plotW - everyPad * 2) / (days.length - 1);
+    const everyDay = everyStep >= letterW + 4;
+    const sparseW = Math.max(nameW, dateW);
+    const sparsePad = sparseW / 2 + 1;
+    const pad = everyDay ? everyPad : sparsePad;
+    const step = (plotW - pad * 2) / (days.length - 1);
+    let stride = 1;
+    if (!everyDay) {
+      if (step <= 0) stride = days.length;
+      else {
+        while (stride < days.length && stride * step < sparseW + 4) stride += 1;
+      }
+    }
+    const xAt = (i) => pad + step * i;
+    const peak = Math.max(0, ...days.flatMap((row) => series.map((item) => Number(row[item.key]) || 0)));
+    const yMax = niceMax(peak);
+    const yAt = (value) => plotH - (value / yMax) * plotH;
+
+    for (let tick = 1; tick <= 4; tick += 1) {
+      const value = (yMax / 4) * tick;
+      g.appendChild(svgEl('line', {
+        class: 'ops-trend__grid',
+        x1: 0,
+        x2: plotW,
+        y1: yAt(value),
+        y2: yAt(value),
+      }));
+    }
+    for (let tick = 0; tick <= 4; tick += 1) {
+      const value = (yMax / 4) * tick;
+      const label = svgEl('text', {
+        class: 'ops-trend__label',
+        x: -8,
+        y: yAt(value),
+        'text-anchor': 'end',
+        'dominant-baseline': 'middle',
+      });
+      label.textContent = fmt(Number.isInteger(value) ? value : Number(value.toFixed(1)));
+      g.appendChild(label);
+    }
+    g.appendChild(svgEl('line', {
+      class: 'ops-trend__baseline',
+      x1: 0,
+      x2: plotW,
+      y1: yAt(0),
+      y2: yAt(0),
+    }));
+
+    function axisText(className, text, x, y) {
+      const w = measure(text, className);
+      let anchor = 'middle';
+      if (x - w / 2 < 1) anchor = 'start';
+      else if (x + w / 2 > plotW - 1) anchor = 'end';
+      const node = svgEl('text', {
+        class: className,
+        x,
+        y,
+        'text-anchor': anchor,
+      });
+      node.textContent = text;
+      g.appendChild(node);
+    }
+
+    days.forEach((row, i) => {
+      const onStride = everyDay || i % stride === 0;
+      if (!onStride) return;
+      const parts = dayParts(row.day);
+      const cls = `ops-trend__label${parts.weekend ? ' is-weekend' : ''}`;
+      axisText(cls, everyDay ? parts.letter : parts.name, xAt(i), plotH + 14);
+      if (everyDay ? i % 7 === 0 : true) {
+        axisText('ops-trend__label is-date', parts.dateLabel, xAt(i), plotH + 28);
+      }
+    });
+
+    series.forEach((item) => {
+      const d = days.map((row, i) => {
+        const cmd = i === 0 ? 'M' : 'L';
+        return `${cmd}${xAt(i).toFixed(1)},${yAt(Number(row[item.key]) || 0).toFixed(1)}`;
+      }).join('');
+      g.appendChild(svgEl('path', { class: `ops-trend__series ${item.className}`, d }));
+    });
+
+    const dots = series.map((item) => {
+      const dot = svgEl('circle', { class: `ops-trend__dot ${item.className}`, r: 4, cx: 0, cy: 0 });
+      dot.style.opacity = '0';
+      g.appendChild(dot);
+      return dot;
+    });
+    const guide = svgEl('line', { class: 'ops-trend__guide', y1: 0, y2: plotH, x1: 0, x2: 0 });
+    guide.style.opacity = '0';
+    g.appendChild(guide);
+
+    function showTip(i, clientX, clientY) {
+      const row = days[i];
+      const parts = dayParts(row.day);
+      const px = xAt(i);
+      guide.setAttribute('x1', String(px));
+      guide.setAttribute('x2', String(px));
+      guide.style.opacity = '1';
+      series.forEach((item, idx) => {
+        dots[idx].setAttribute('cx', String(px));
+        dots[idx].setAttribute('cy', String(yAt(Number(row[item.key]) || 0)));
+        dots[idx].style.opacity = '1';
+      });
+      tip.replaceChildren();
+      const title = document.createElement('p');
+      title.className = 'ops-trend__tip-date';
+      title.textContent = `${parts.name}, ${parts.dateLabel}`;
+      tip.appendChild(title);
+      series.forEach((item) => {
+        const line = document.createElement('p');
+        line.className = 'ops-trend__tip-row';
+        const name = document.createElement('span');
+        name.textContent = item.label;
+        const value = document.createElement('span');
+        value.textContent = fmt(row[item.key]);
+        line.appendChild(name);
+        line.appendChild(value);
+        tip.appendChild(line);
+      });
+      tip.hidden = false;
+      const wrap = svg.parentNode.getBoundingClientRect();
+      let left = clientX - wrap.left + 14;
+      let top = clientY - wrap.top - tip.offsetHeight - 10;
+      if (left + tip.offsetWidth > wrap.width - 4) left = clientX - wrap.left - tip.offsetWidth - 14;
+      if (left < 4) left = 4;
+      if (top < 4) top = clientY - wrap.top + 14;
+      tip.style.left = `${left}px`;
+      tip.style.top = `${top}px`;
+    }
+
+    const overlay = svgEl('rect', { fill: 'transparent', x: 0, y: 0, width: plotW, height: plotH });
+    overlay.addEventListener('pointermove', (event) => {
+      const local = event.clientX - overlay.getBoundingClientRect().left;
+      let nearest = 0;
+      let best = Infinity;
+      days.forEach((_, i) => {
+        const dist = Math.abs(xAt(i) - local);
+        if (dist < best) {
+          best = dist;
+          nearest = i;
+        }
+      });
+      showTip(nearest, event.clientX, event.clientY);
+    });
+    overlay.addEventListener('pointerleave', () => {
+      guide.style.opacity = '0';
+      dots.forEach((dot) => { dot.style.opacity = '0'; });
+      tip.hidden = true;
+    });
+    g.appendChild(overlay);
+  }
+
+  function bindTrend(id, series) {
+    if (trendPaint[id]) return;
+    const svg = $(id);
+    const tip = $(`${id}-tip`);
+    if (!svg || !tip) return;
+    let days = [];
+    const paint = () => paintTrend(svg, tip, days, series);
+    trendPaint[id] = (next) => {
+      days = next;
+      paint();
+    };
+    if (typeof ResizeObserver === 'function') {
+      const observer = new ResizeObserver(() => paint());
+      observer.observe(svg);
+    }
+  }
+
+  function renderTrends(days) {
+    const body = $('ops-trends-body');
+    const empty = $('ops-trends-empty');
+    const rows = Array.isArray(days) ? days.filter((row) => row && row.day) : [];
+    const ready = rows.length >= 2;
+    if (body) body.hidden = !ready;
+    if (empty) empty.hidden = ready;
+    if (!ready) return;
+    bindTrend('ops-trend-people', [
+      { key: 'users', label: 'Users', className: 'is-users' },
+      { key: 'matchups', label: 'Matchups', className: 'is-matchups' },
+    ]);
+    bindTrend('ops-trend-votes', [
+      { key: 'votes', label: 'Votes', className: 'is-votes' },
+    ]);
+    if (trendPaint['ops-trend-people']) trendPaint['ops-trend-people'](rows);
+    if (trendPaint['ops-trend-votes']) trendPaint['ops-trend-votes'](rows);
+  }
+
   function render(snapshot) {
     const season = snapshot.season || {};
     const users = snapshot.users || {};
@@ -240,6 +487,7 @@
 
     renderNflSync(snapshot.nfl_sync || {});
     renderCrons(snapshot.crons || []);
+    renderTrends((snapshot.activity || {}).days);
 
     flagsEl.innerHTML = '';
     if (!flags.length) {

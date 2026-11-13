@@ -67,7 +67,7 @@
           <p class="ops-tile__hint" id="ops-votes-avg"></p>
         </article>
         <article class="ops-tile">
-          <p class="ops-tile__label">Early</p>
+          <p class="ops-tile__label">Projection-led</p>
           <p class="ops-tile__value" id="ops-early">—</p>
         </article>
         <article class="ops-tile ops-tile--ready">
@@ -79,6 +79,30 @@
       <div class="ops-card" style="margin-top:12px">
         <p class="ops-kicker">Red flags</p>
         <ul class="ops-flags" id="ops-flags"></ul>
+      </div>
+      <div class="ops-card ops-trends" id="ops-trends" style="margin-top:12px">
+        <p class="ops-kicker">Last 30 days</p>
+        <p class="ops-trends__empty" id="ops-trends-empty">Daily activity will show here.</p>
+        <div id="ops-trends-body" hidden>
+          <div class="ops-trend">
+            <p class="ops-trend__name" id="ops-trend-people-title">Users and matchups</p>
+            <div class="ops-trend__chart">
+              <svg id="ops-trend-people" role="img" aria-labelledby="ops-trend-people-title"></svg>
+              <div class="ops-trend__tip" id="ops-trend-people-tip" hidden></div>
+            </div>
+            <div class="ops-trend__legend">
+              <span class="ops-trend__key"><i class="ops-trend__swatch ops-trend__swatch--users" aria-hidden="true"></i>Users</span>
+              <span class="ops-trend__key"><i class="ops-trend__swatch ops-trend__swatch--matchups" aria-hidden="true"></i>Matchups</span>
+            </div>
+          </div>
+          <div class="ops-trend">
+            <p class="ops-trend__name" id="ops-trend-votes-title">Votes</p>
+            <div class="ops-trend__chart">
+              <svg id="ops-trend-votes" role="img" aria-labelledby="ops-trend-votes-title"></svg>
+              <div class="ops-trend__tip" id="ops-trend-votes-tip" hidden></div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="ops-card ops-sync" style="margin-top:12px">
         <div class="ops-sync__head">
@@ -98,6 +122,6 @@
     <p class="ops-status" id="ops-status"></p>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.js"></script>
-  <script src="../js/ops.js?v=board" defer></script>
+  <script src="../js/ops.js?v=trends" defer></script>
 </body>
 </html>
