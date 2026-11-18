@@ -476,6 +476,10 @@
     setText('ops-users', fmt(users.week));
     setText('ops-matchups-user', fmt(matchups.user_created));
     setText('ops-matchups-generated', fmt(matchups.generated));
+    const byFormat = matchups.by_format || {};
+    setText('ops-type-h2h', fmt(byFormat.h2h));
+    setText('ops-type-pick1', fmt(byFormat.pick1));
+    setText('ops-type-pick2', fmt(byFormat.pick2));
     setText('ops-votes', fmt(votes.week));
     setText('ops-votes-avg', votesPerUser(votes.week, users.week));
     setText('ops-early', fmt(early.week_matchups_below_k));
